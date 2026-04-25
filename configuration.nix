@@ -79,6 +79,8 @@
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
+    nixd
+    nixpkgs-fmt
     vim
     wget
     git
@@ -104,6 +106,7 @@
       ];
     })
     lsfg-vk-ui
+    
   ];
   
   programs.zsh = {
