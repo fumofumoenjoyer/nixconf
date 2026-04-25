@@ -8,7 +8,22 @@
 
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelModules = [ "ntsync" ];
+  
+  boot.kernel.sysctl = {
+    "vm.max_map_count" = 2147483642; # SteamOS default
+  };   
+  
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "-"; # "-" sets both soft and hard limits
+      item = "nofile";
+      value = "1048576";
+    }
+  ];   
+  
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
@@ -54,6 +69,7 @@
 
   users.users.fumo = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "libvirt" ];
     packages = with pkgs; [
       
@@ -90,6 +106,10 @@
     lsfg-vk-ui
   ];
   
+  programs.zsh = {
+    enable = true;
+  };
+  
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
   programs.steam = {
@@ -100,7 +120,17 @@
   };
 
   services.flatpak.enable = true;
-
+  services.flatpak.packages = [
+    "com.usebottles.bottles"
+    "com.github.tchx84.Flatseal"
+    "com.discordapp.Discord"
+    "com.protonvpn.www"
+    "com.stremio.Stremio"
+    "com.vysp3r.ProtonPlus"
+    "net.retrodeck.retrodeck"
+    "org.vinegarhq.Sober"
+    "com.obsproject.Studio"
+  ];
   # Dynamically linked executables
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
