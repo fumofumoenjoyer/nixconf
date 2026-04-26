@@ -10,16 +10,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelModules = [ "ntsync" ];
-  # 1. Disable Power Management for the PCIe bus and the Realtek driver
-  boot.kernelParams = [
-    "pcie_aspm=off"
-    "r8169.aspm=0"
-  ];
-
-  # 2. Force Energy Efficient Ethernet (EEE) to stay OFF
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="net", NAME=="enp9s0", RUN+="${pkgs.ethtool}/bin/ethtool --set-eee enp9s0 eee off"
-  '';
 
   boot.kernel.sysctl = {
     "vm.max_map_count" = 2147483642; # SteamOS default
