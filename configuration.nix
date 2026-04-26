@@ -10,11 +10,21 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelModules = [ "ntsync" ];
-  
+  # 1. Disable Power Management for the PCIe bus and the Realtek driver
+  boot.kernelParams = [
+    "pcie_aspm=off"
+    "r8169.aspm=0"
+  ];
+
+  # 2. Force Energy Efficient Ethernet (EEE) to stay OFF
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="net", NAME=="enp9s0", RUN+="${pkgs.ethtool}/bin/ethtool --set-eee enp9s0 eee off"
+  '';
+
   boot.kernel.sysctl = {
     "vm.max_map_count" = 2147483642; # SteamOS default
-  };   
-  
+  };
+
   security.pam.loginLimits = [
     {
       domain = "*";
@@ -22,14 +32,14 @@
       item = "nofile";
       value = "1048576";
     }
-  ];   
-  
+  ];
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
-  
+
   systemd.package = pkgs.systemd.override { withUserDb = false; };
   services.userdbd.enable = lib.mkForce false;
 
@@ -49,7 +59,7 @@
     enable32Bit = true; # Required for Steam/Wine
     extraPackages = [
       pkgs.lsfg-vk
-      ];
+    ];
   };
 
   #Power Profiles Daemon
@@ -72,7 +82,7 @@
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "libvirt" ];
     packages = with pkgs; [
-      
+
     ];
   };
 
@@ -106,9 +116,9 @@
       ];
     })
     lsfg-vk-ui
-    
+    ethtool
   ];
-  
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -117,7 +127,7 @@
   programs.zsh = {
     enable = true;
   };
-  
+
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
   programs.steam = {
@@ -159,10 +169,10 @@
       nerd-fonts.hack
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
-      
+
     ];
   };
-  
+
   virtualisation = {
     libvirtd = {
       enable = true;
