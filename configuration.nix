@@ -109,6 +109,7 @@
     vim
     wget
     git
+    file
     sbctl
     brave
     antigravity-fhs
