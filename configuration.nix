@@ -210,7 +210,7 @@
   programs.virt-manager.enable = true;
   services.spice-vdagentd.enable = true; # Clipboard sharing with VMs
 
-
+  documentation.man.generateCaches = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.11";
