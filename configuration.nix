@@ -24,7 +24,7 @@
     }
   ];
 
-  networking.hostName = "nixos";
+  networking.hostName = "nixtux";
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -51,9 +51,32 @@
       pkgs.lsfg-vk
     ];
   };
+  
+  # NVIDIA
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    # Comment these when not using dual gpus on laptops
+    prime = {
+      offload.enable = true;
+      offload.enableOffloadCmd = true; # This creates the `nvidia-offload` script
+      # Replace these with the corresponding value from the lspci command ```nix-shell -p pciutils --run "lspci"```
+      #intelBusId = "PCI:0:2:0"; 
+      amdgpuBusId = "PCI:66:0:0";
+      nvidiaBusId = "PCI:64:0:0";
+    };
+  };
+  
 
   #Power Profiles Daemon
-  services.power-profiles-daemon.enable = true;
+  #services.power-profiles-daemon.enable = true;
+  hardware.tuxedo-drivers.enable = true;
+  hardware.tuxedo-rs = {
+    enable = true;
+    tailor-gui.enable = true;
+    };   
 
   # GPU Daemon (Overclocking/Fan control)
   services.lact.enable = true;
@@ -107,6 +130,8 @@
     })
     lsfg-vk-ui
     ethtool
+    pciutils
+    mesa-demos
   ];
 
   programs.direnv = {
