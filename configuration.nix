@@ -58,13 +58,13 @@
   #  modesetting.enable = true;
   #  open = true;
   #  nvidiaSettings = true;
-  # # Comment these when not using dual gpus on laptops
+  #  #Comment these when not using dual gpus on laptops
   #  prime = {
   #   offload.enable = true;
   #    offload.enableOffloadCmd = true; # This creates the `nvidia-offload` script
   #    # Replace these with the corresponding value from the lspci command ```nix-shell -p pciutils --run "lspci"```
   #    #intelBusId = "PCI:0:2:0"; 
-  #   amdgpuBusId = "PCI:66:0:0";
+  #    amdgpuBusId = "PCI:66:0:0";
   #    nvidiaBusId = "PCI:64:0:0";
   #  };
   #};
