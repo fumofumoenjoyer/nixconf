@@ -134,6 +134,7 @@
     ethtool
     pciutils
     mesa-demos
+    resources
   ];
 
   programs.direnv = {
