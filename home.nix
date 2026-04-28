@@ -4,7 +4,7 @@
   home.username = "fumo";
   home.homeDirectory = "/home/fumo";
   home.stateVersion = "25.11";
-  
+
   programs.git = {
     enable = true;
     settings = {
@@ -20,7 +20,7 @@
     gitCredentialHelper = {
       enable = true;
     };
-  };   
+  };
 
   programs.zsh = {
     enable = true;

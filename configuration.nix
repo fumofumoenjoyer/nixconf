@@ -1,10 +1,19 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
     [
       ./hardware-configuration.nix
     ];
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = prev.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
+    })
+  ];
 
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,7 +57,7 @@
     enable = true;
     enable32Bit = true; # Required for Steam/Wine
     extraPackages = [
-      pkgs.lsfg-vk
+      pkgs.unstable.lsfg-vk
     ];
   };
 
@@ -101,8 +110,6 @@
     ];
   };
 
-  programs.firefox.enable = true;
-
   environment.systemPackages = with pkgs; [
     nixd
     nixpkgs-fmt
@@ -111,8 +118,9 @@
     git
     file
     sbctl
-    brave
-    antigravity-fhs
+    unstable.brave
+    unstable.antigravity-fhs
+    unstable.librewolf
     _7zz
     unrar
     fastfetch
@@ -125,17 +133,18 @@
     mangohud
     goverlay
     lact
-    (heroic.override {
-      extraPkgs = pkgs': with pkgs'; [
-        gamescope
-        gamemode
-      ];
-    })
-    lsfg-vk-ui
+    unstable.lsfg-vk-ui
     ethtool
     pciutils
     mesa-demos
     resources
+    unstable.renpy
+    (pkgs.unstable.heroic.override {
+      extraPkgs = p: [
+        pkgs.unstable.gamescope
+        pkgs.unstable.gamemode
+      ];
+    })
   ];
 
   programs.direnv = {
