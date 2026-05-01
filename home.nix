@@ -68,11 +68,45 @@
         ];
       }
     ];
-    shortcuts = { };
+
+
+
+    shortcuts = {
+
+      kwin."Switch to Desktop 1" = "Meta+1";
+      kwin."Switch to Desktop 2" = "Meta+2";
+      kwin."Switch to Desktop 3" = "Meta+3";
+      kwin."Switch to Desktop 4" = "Meta+4";
+      kwin."Switch to Desktop 5" = "Meta+5";
+      kwin."Switch to Desktop 6" = "Meta+6";
+      kwin."Switch to Desktop 7" = "Meta+7";
+      kwin."Switch to Desktop 8" = "Meta+8";
+      kwin."Switch to Desktop 9" = "Meta+9";
+
+      kwin."Window to Desktop 1" = "Meta+!";
+      kwin."Window to Desktop 2" = "Meta+@";
+      kwin."Window to Desktop 3" = "Meta+#";
+      kwin."Window to Desktop 4" = "Meta+$";
+      kwin."Window to Desktop 5" = "Meta+%";
+      kwin."Window to Desktop 6" = "Meta+^";
+      kwin."Window to Desktop 7" = "Meta+&";
+      kwin."Window to Desktop 8" = "Meta+*";
+      kwin."Window to Desktop 9" = "Meta+(";
+
+      "services/brave-browser.desktop"._launch = "Meta+B";
+      "services/org.kde.konsole.desktop"._launch = [ "Meta+Return" "Meta+T" ];
+
+
+    };
     spectacle.shortcuts = {
       captureEntireDesktop = "Print";
       captureRectangularRegion = "Meta+Print";
       captureActiveWindow = "Meta+Shift+Print";
+    };
+
+    configFile = {
+      kwinrc.Desktops.Number = 4;
+      kwinrc.Desktops.Rows = 1;
     };
   };
 }

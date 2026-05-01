@@ -17,7 +17,7 @@
 
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_xanmod_latest;
   boot.kernelModules = [ "ntsync" ];
 
   boot.kernel.sysctl = {
@@ -57,6 +57,12 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+  };
+
+  services.xserver = {
+    enable = true; # Required for X11 layout configuration
+    xkb.layout = "us";
+    xkb.variant = "altgr-intl";
   };
 
   hardware.graphics = {
