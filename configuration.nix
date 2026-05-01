@@ -24,6 +24,8 @@
     "vm.max_map_count" = 2147483642; # SteamOS default
   };
 
+  systemd.settings.Manager.DefaultLimitNOFILE = "1048576";
+  systemd.user.extraConfig = "DefaultLimitNOFILE=1048576";
   security.pam.loginLimits = [
     {
       domain = "*";
@@ -35,6 +37,10 @@
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
+    allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
+  };
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
@@ -98,8 +104,10 @@
     extraLocales = [ "ja_JP.UTF-8/UTF-8" ];
   };
 
-  services.displayManager.cosmic-greeter.enable = true;
-  services.desktopManager.cosmic.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  programs.kdeconnect.enable = true;
 
   users.users.fumo = {
     isNormalUser = true;
@@ -124,10 +132,7 @@
     _7zz
     unrar
     fastfetch
-    file-roller
     thunderbird
-    lollypop
-    gthumb
     mpv
     appimage-run
     mangohud
@@ -137,7 +142,6 @@
     ethtool
     pciutils
     mesa-demos
-    resources
     unstable.renpy
     (pkgs.unstable.heroic.override {
       extraPkgs = p: [
