@@ -1,9 +1,15 @@
-# nixconf
+# FumoFumoEnjoyer's NixOS Config
+### Features
+* XanMod Kernel
+* Virtualization enabled by default (Podman and Qemu/KVM)
+* Systemd without userdb
+* Sane gaming defaults (Increased nofile limits and vm.max_map_count)
+
 ### Prerequisites
-* NixOS
+* NixOS Installed (Minimal or KDE Plasma Preferred to avoid Home dir cluttering)
 * Replace the ```hardware-configuration.nix``` for the one generated when you installed NixOS (usually on ```/etc/nixos```)
 
-
+## Usage
 ### Switch to config
 ```
 cd nixconf
