@@ -178,6 +178,7 @@
   services.flatpak.enable = true;
   services.flatpak.packages = [
     "com.usebottles.bottles"
+    "org.qbittorrent.qBittorrent"
     "com.github.tchx84.Flatseal"
     "com.discordapp.Discord"
     "com.protonvpn.www"
