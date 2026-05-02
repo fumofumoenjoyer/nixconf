@@ -133,6 +133,7 @@
     file
     sbctl
     dnsmasq
+    waypipe
     unstable.brave
     unstable.antigravity-fhs
     unstable.librewolf
