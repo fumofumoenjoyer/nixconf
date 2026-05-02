@@ -118,7 +118,7 @@
   users.users.fumo = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "libvirt" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [
 
     ];
@@ -132,6 +132,7 @@
     git
     file
     sbctl
+    dnsmasq
     unstable.brave
     unstable.antigravity-fhs
     unstable.librewolf
@@ -219,6 +220,7 @@
         package = pkgs.qemu_kvm;
         runAsRoot = true;
         swtpm.enable = true; # TPM support for Windows 11 VMs
+        vhostUserPackages = with pkgs; [ virtiofsd ];
       };
     };
     podman = {
