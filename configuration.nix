@@ -136,7 +136,6 @@
     waypipe
     unstable.brave
     unstable.antigravity-fhs
-    unstable.librewolf
     _7zz
     unrar
     fastfetch
@@ -168,6 +167,8 @@
     enable = true;
   };
 
+  programs.firefox.enable = true;
+
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
   programs.steam = {
@@ -179,6 +180,8 @@
 
   services.flatpak.enable = true;
   services.flatpak.packages = [
+    "io.gitlab.librewolf-community"
+    "org.garudalinux.firedragon"
     "com.usebottles.bottles"
     "org.qbittorrent.qBittorrent"
     "com.github.tchx84.Flatseal"
