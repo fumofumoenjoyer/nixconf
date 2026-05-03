@@ -189,6 +189,7 @@
     "net.retrodeck.retrodeck"
     "org.vinegarhq.Sober"
     "com.obsproject.Studio"
+    "website.i2pd.i2pd"
   ];
   # Dynamically linked executables
   programs.nix-ld.enable = true;
