@@ -99,9 +99,9 @@
 
     };
     spectacle.shortcuts = {
-      captureEntireDesktop = "Print";
-      captureRectangularRegion = "Meta+Print";
-      captureActiveWindow = "Meta+Shift+Print";
+      captureEntireDesktop = "Meta+Print";
+      captureRectangularRegion = "Meta+Shift+Print";
+      captureActiveWindow = "Meta+Ctrl+Print";
     };
 
     configFile = {

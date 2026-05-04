@@ -133,6 +133,7 @@
     file
     sbctl
     dnsmasq
+    gnupg
     waypipe
     unstable.brave
     unstable.antigravity-fhs
