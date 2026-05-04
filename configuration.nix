@@ -43,7 +43,6 @@
   };
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
 
   systemd.package = pkgs.systemd.override { withUserDb = false; };
   services.userdbd.enable = lib.mkForce false;
