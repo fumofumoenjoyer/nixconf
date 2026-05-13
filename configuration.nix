@@ -35,11 +35,55 @@
     }
   ];
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-  networking.firewall = {
-    allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
-    allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
+  networking = {
+    hostName = "nixos";
+    resolvconf.enable = false;
+    nameservers = [ "127.0.0.1" "::1" ];
+    networkmanager = { 
+      enable = true;
+      dns = "none";
+      settings = {
+        main = {
+          dns = "none";
+        };
+        connection = {
+          "ipv4.ignore-auto-dns" = true;
+          "ipv6.ignore-auto-dns" = true;
+        };
+      };
+    };
+    firewall = {
+      allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
+      allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
+    };
+  };
+  services.resolved.enable = false;
+  services.stubby = {
+    enable = true;
+    settings = {
+      listen_addresses = [ "127.0.0.1" "0::1" ];
+      resolution_type = "GETDNS_RESOLUTION_STUB";
+      dns_transport_list = [ "GETDNS_TRANSPORT_TLS" ];
+      tls_authentication = "GETDNS_AUTHENTICATION_REQUIRED";
+      upstream_recursive_servers = [
+        {
+          address_data = "9.9.9.9";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "149.112.112.112";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "2620:fe::fe";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "2620:fe::9";
+          tls_auth_name = "dns.quad9.net";
+        }
+      ];
+    };
   };
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
