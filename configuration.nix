@@ -39,7 +39,7 @@
     hostName = "nixos";
     resolvconf.enable = false;
     nameservers = [ "127.0.0.1" "::1" ];
-    networkmanager = { 
+    networkmanager = {
       enable = true;
       dns = "none";
       settings = {
@@ -204,6 +204,7 @@
     unstable.haskellPackages.misfortune
     unstable.cowsay
     unstable.lolcat
+    protonvpn-gui
   ];
 
   programs.direnv = {
@@ -234,7 +235,6 @@
     "org.qbittorrent.qBittorrent"
     "com.github.tchx84.Flatseal"
     "com.discordapp.Discord"
-    "com.protonvpn.www"
     "com.vysp3r.ProtonPlus"
     "net.retrodeck.retrodeck"
     "org.vinegarhq.Sober"
