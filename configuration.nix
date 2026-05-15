@@ -196,15 +196,15 @@
     pciutils
     mesa-demos
     unstable.renpy
+    unstable.haskellPackages.misfortune
+    unstable.cowsay
+    unstable.lolcat
     (pkgs.unstable.heroic.override {
       extraPkgs = p: [
         pkgs.unstable.gamescope
         pkgs.unstable.gamemode
       ];
     })
-    unstable.haskellPackages.misfortune
-    unstable.cowsay
-    unstable.lolcat
     protonvpn-gui
   ];
 
@@ -237,8 +237,7 @@
     "com.github.tchx84.Flatseal"
     "com.discordapp.Discord"
     "com.vysp3r.ProtonPlus"
-    "net.retrodeck.retrodeck"
-    "org.vinegarhq.Sober"
+    "com.github.Matoking.protontricks"
     "com.obsproject.Studio"
     "website.i2pd.i2pd"
     "org.onlyoffice.desktopeditors"
