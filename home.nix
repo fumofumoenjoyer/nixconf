@@ -13,8 +13,8 @@
     enable = true;
     settings = {
       user = {
-        name = "FumoFumoEnjoyer";
-        email = "FumoFumoEnjoyer@fumofumo.dev";
+        name = "JuanU";
+        email = "juanu@fumoctl.com";
       };
     };
   };
